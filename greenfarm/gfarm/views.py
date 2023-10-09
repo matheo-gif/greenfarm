@@ -42,6 +42,13 @@ class profilePage(LoginRequiredMixin, CreateView):
      model = Profile
      form_class = ProfileForm
      template_name = "NiceAdmin/users-profile.html"
+     
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    fields = UpdateProfileForm
+    template_name = "NiceAdmin/users-profile.html"
+    success_url = reverse_lazy('farmerslist')
+
 # ------------
 class FarmerCreate(LoginRequiredMixin, CreateView):
      model = Farmers
@@ -68,6 +75,15 @@ class FarmersDeleteView(LoginRequiredMixin, DeleteView):
     model = Farmers
     template_name = "delete_form.html"
     success_url = reverse_lazy("farmers")
+    
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        blogs = BlogPost.objects.filter(title__contains=searched)
+        return render(request, "search.html", {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, "search.html", {})
+
 
 
 # ---------
@@ -95,6 +111,15 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "delete_form.html"
     success_url = reverse_lazy("product")
     
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        blogs = FarmProduct.objects.filter(title__contains=searched)
+        return render(request, "search.html", {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, "search.html", {})
+
+    
 #-----------------
 class DiseaseCreateView(LoginRequiredMixin, CreateView):
      model =Diseases_and_Pestes
@@ -105,13 +130,13 @@ class DiseaseCreateView(LoginRequiredMixin, CreateView):
 
 class DiseaseListView(LoginRequiredMixin, ListView):
      queryset = Diseases_and_Pestes.objects.all()
-     context_object_name = "product"
-     template_name = "p&diseases_list.html"
+     context_object_name = "diseases"
+     template_name = "update_disease_form.html"
 
 
 class DiseaseUpdateView(LoginRequiredMixin, UpdateView):
     model = Diseases_and_Pestes
-    fields = ['Maize_Variety','desease_name','description', 'posible_solution','county_affected']
+    fields = "__all__"
     template_name = "update_disease_form.html"
     success_url = reverse_lazy("disease")
 
@@ -120,11 +145,20 @@ class DiseaseDeleteView(LoginRequiredMixin, DeleteView):
      template_name = "delete_form.html"
      success_url = reverse_lazy("disease")
      
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        blogs = Diseases_and_Pestes.objects.filter(title__contains=searched)
+        return render(request, "search.html", {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, "search.html", {})
+
+     
 #-----------------
  
 class HarvestCreateView(LoginRequiredMixin, CreateView):
      model = Harvest
-     form_class = ProductForm
+     form_class = HarvestForm
      template_name = "farm_harvest_form.html"
      success_url = reverse_lazy('harvest')
 
@@ -144,6 +178,15 @@ class HarvestDeleteView(LoginRequiredMixin, DeleteView):
      model = Harvest
      template_name = "delete_form.html"
      success_url = reverse_lazy("disease")
+     
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        blogs = Harvest.objects.filter(title__contains=searched)
+        return render(request, "search.html", {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, "search.html", {})
+
 
 # ---------------
 class FarmMarketingCreateView(LoginRequiredMixin, CreateView):
@@ -161,6 +204,15 @@ class FarmMarketingtDeleteView(LoginRequiredMixin, DeleteView):
     model = FarmMarketing
     template_name = "delete_form.html"
     success_url = reverse_lazy("marketplaces")
+    
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        blogs = FarmMarketing.objects.filter(title__contains=searched)
+        return render(request, "search.html", {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, "search.html", {})
+
 
 
 class FarmMarketingUpdateView(LoginRequiredMixin, UpdateView):
@@ -191,6 +243,15 @@ class contactDeleteView(LoginRequiredMixin, DeleteView):
     model = Contact
     template_name = "delete_form.html"
     success_url = reverse_lazy("contact")
+    
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        blogs = Contact.objects.filter(title__contains=searched)
+        return render(request, "search.html", {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, "search.html", {})
+
 
 # class RegisterPage(TemplateView):
 #      template_name = "NiceAdmin/pages-register.html"

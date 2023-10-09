@@ -46,7 +46,7 @@ class Farmers(models.Model):
     sub_county = models.CharField(blank=False, null=False, max_length=100)
     job = models.CharField(blank=True, null=True, max_length=100)
     Social_media=models.URLField(max_length=200)
-    password = models.CharField(max_length=50)
+    
     
 
     def __str__(self):
@@ -178,11 +178,11 @@ class FarmMarketing(models.Model):
 class Diseases_and_Pestes(models.Model):
     Maize_Variety = models.ForeignKey(FarmProduct, on_delete=models.CASCADE)
     desease_name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="profile_pics", blank=True, null=True)
     description = models.TextField(max_length=200)
     posible_solutions = models.TextField(max_length=200)
     county_affected = models.CharField(max_length=100, choices=COUNTIES, default='mombasa')
     
-    def __str__(self):
-        return f"deseases for {self.product.Maize_Variety}"  
+     
      
     

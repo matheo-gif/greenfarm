@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 from .views import *
 
 urlpatterns = [
-     path("", TemplateView.as_view(template_name="index.html")),
+     path("homepage/", TemplateView.as_view(template_name="index.html")),
      path('register/', views.register, name='register'),
      path("about/", TemplateView.as_view(template_name="NiceAdmin/pages-about.html")),
      path("profile/", TemplateView.as_view(template_name="NiceAdmin/users-profile.html")),
@@ -28,15 +28,15 @@ urlpatterns = [
      path('product/delete/<str:pk>/', ProductDeleteView.as_view(), name="product-delete"),
      path('product/update/<str:pk>/', ProductUpdateView.as_view(), name="product-update"),
      
-     path("add_diseasharvestse/",DiseaseCreateView.as_view(), name="add_farm_product"),
-     path("disease/", DiseaseListView.as_view(), name="disease"),
+     path("add_diseases/",DiseaseCreateView.as_view(), name="add_farm_product"),
+     path("", DiseaseListView.as_view(), name="disease"),
      path('disease/delete/<str:pk>/', DiseaseDeleteView.as_view(), name="disease-delete"),
      path('disease/update/<str:pk>/', DiseaseUpdateView.as_view(), name="disease-update"),
      
-     path("add_harvests/",DiseaseCreateView.as_view(), name="add_farm_harvest"),
-     path("harvests/", DiseaseListView.as_view(), name="harvests"),
-     path('harvests/delete/<str:pk>/', DiseaseDeleteView.as_view(), name="harvests-delete"),
-     path('harvests/update/<str:pk>/', DiseaseUpdateView.as_view(), name="harvests-update"),
+     path("add_harvests/",HarvestCreateView.as_view(), name="add_farm_harvest"),
+     path("harvests/", HarvestListView.as_view(), name="harvests"),
+     path('harvests/delete/<str:pk>/', HarvestDeleteView.as_view(), name="harvests-delete"),
+     path('harvests/update/<str:pk>/', HarvestUpdateView.as_view(), name="harvests-update"),
 
      path("contact/", contactListView.as_view(), name="contact-info"),
      path("add_contact/",contactPage.as_view()),
