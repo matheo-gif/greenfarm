@@ -1,11 +1,47 @@
 from . import views
 from django.urls import path
 from django.views.generic import TemplateView
+from .views import *
 
 urlpatterns = [
      path("", TemplateView.as_view(template_name="index.html")),
-     path("about/", TemplateView.as_view(template_name="NiceAdmin/pages-contact.html")),
+     path('register/', views.register, name='register'),
+     path("about/", TemplateView.as_view(template_name="NiceAdmin/pages-about.html")),
      path("profile/", TemplateView.as_view(template_name="NiceAdmin/users-profile.html")),
      path("contact/", TemplateView.as_view(template_name="NiceAdmin/pages-contact.html")),
+     path("faq/", TemplateView.as_view(template_name="NiceAdmin/pages-faq.html")),
+
+     path("addfarmer/", FarmerCreate.as_view() ),
+     path("farmerslist/", FarmerListView.as_view(), name="farmers" ),
+     path('farmers/<str:pk>/', FarmersDetailsView.as_view()),
+     path('farmers/delete/<str:pk>/', FarmersDeleteView.as_view(), name="farmer-delete"),
+     path('farmers/update/<str:pk>/', FarmersUpdateView.as_view(), name="farmer-update"),
+     
+     
+     path("add_market_place/", FarmMarketingCreateView.as_view(), name="add_market_place"),
+     path("market/", FarmMarketingListView.as_view(), name="marketplaces"),
+     path('market/delete/<str:pk>/', FarmMarketingtDeleteView.as_view(), name='delete_market'),
+     path('market/update/<str:pk>/', FarmMarketingUpdateView.as_view(), name='update_market'),
+
+     path("add_product/",productCreateView.as_view(), name="add_farm_product"),
+     path("product/", ProductListView.as_view(), name="product"),
+     path('product/delete/<str:pk>/', ProductDeleteView.as_view(), name="product-delete"),
+     path('product/update/<str:pk>/', ProductUpdateView.as_view(), name="product-update"),
+     
+     path("add_diseasharvestse/",DiseaseCreateView.as_view(), name="add_farm_product"),
+     path("disease/", DiseaseListView.as_view(), name="disease"),
+     path('disease/delete/<str:pk>/', DiseaseDeleteView.as_view(), name="disease-delete"),
+     path('disease/update/<str:pk>/', DiseaseUpdateView.as_view(), name="disease-update"),
+     
+     path("add_harvests/",DiseaseCreateView.as_view(), name="add_farm_harvest"),
+     path("harvests/", DiseaseListView.as_view(), name="harvests"),
+     path('harvests/delete/<str:pk>/', DiseaseDeleteView.as_view(), name="harvests-delete"),
+     path('harvests/update/<str:pk>/', DiseaseUpdateView.as_view(), name="harvests-update"),
+
+     path("contact/", contactListView.as_view(), name="contact-info"),
+     path("add_contact/",contactPage.as_view()),
+     path('contact/delete/<str:pk>/', contactDeleteView.as_view(), name="contact-delete"),
+     path('contact/update/<str:pk>/', contactUpdateView.as_view(), name="contact-update"),
+     
      
 ]

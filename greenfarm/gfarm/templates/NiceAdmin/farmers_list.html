@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% block body %} {% load static %}
+
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>Data Tables</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Data</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Datatables</h5>
+              <p>Add lightweight datatables to your project with using the <a href="https://github.com/fiduswriter/Simple-DataTables" target="_blank">Simple DataTables</a> library. Just add <code>.datatable</code> class name to any table you wish to conver to a datatable</p>
+
+              <!-- Table with stripped rows -->
+             
+                  <table class="table datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">userName</th>
+                        <th scope="col">first name</th>
+                        <th scope="col">other name</th>
+                        <th scope="col">address</th>
+                        <th scope="col">email</th>
+                        <th scope="col">phone no</th>
+                        <th scope="col">county</th>
+                        <th scope="col">sub-county</th>
+                        <th scope="col">job</th>
+                        <th scope="col">trash</th>
+                        
+                      </tr>
+                    </thead>
+                    
+                    <tbody>
+                      {% for farmers in farmer %}
+                      <tr>
+                        <th scope="row"><a href="{%url 'farmer-update' farmers.id %}">{{farmers.id}}</a></th>
+                        <td>{{farmers.username}}</td>
+                        <td>{{farmers.first_name}}</td>
+                        <td>{{farmers.other_name}}</td>
+                        <td>{{farmers.address}}</td>
+                        <td>{{farmers.email}}</td>
+                        <td>{{farmers.phone_no}}</td>
+                        <td>{{farmers.county}}</td>
+                        <td>{{farmers.sub_county}}</td>
+                        <td>{{farmers.job}}</td>
+                        <td><a href="{% url 'farmer-delete' farmers.id %}">
+                          <div class="icon">
+                          <i class="bi bi-trash"></i>
+                          
+                        </div>
+
+                        </a></td>
+                        
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                    
+                  </table>
+            
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+  {% endblock %}
+
