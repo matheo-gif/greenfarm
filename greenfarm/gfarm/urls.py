@@ -16,6 +16,7 @@ urlpatterns = [
      path('farmers/<str:pk>/', FarmersDetailsView.as_view()),
      path('farmers/delete/<str:pk>/', FarmersDeleteView.as_view(), name="farmer-delete"),
      path('farmers/update/<str:pk>/', FarmersUpdateView.as_view(), name="farmer-update"),
+     path('csv',views.getfile),  
      
      
      path("add_market_place/", FarmMarketingCreateView.as_view(), name="add_market_place"),

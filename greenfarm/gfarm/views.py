@@ -10,6 +10,11 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import FileResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+import csv  
 # Views
 @login_required
 def home(request):
@@ -43,6 +48,9 @@ class profilePage(LoginRequiredMixin, CreateView):
      form_class = ProfileForm
      template_name = "NiceAdmin/users-profile.html"
      
+     
+
+     
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     fields = UpdateProfileForm
@@ -60,6 +68,17 @@ class FarmerListView(LoginRequiredMixin, ListView):
      queryset = Farmers.objects.all()
      context_object_name = "farmer"
      template_name = "NiceAdmin/farmers_list.html"
+     
+def getfile(request):  
+    response = HttpResponse(content_type='text/csv')  
+    response['Content-Disposition'] = 'attachment; filename="file.csv"'  
+    queryset = Farmers.objects.all()  
+    writer = csv.writer(response)  
+    for Farmer in Farmers:
+        writer.writerow([Farmer.username,Farmer.first_name,
+                         Farmer.other_name,Farmer.address,email,Farmer.phone_no,
+                         county,Farmer.sub_county,Farmer.job])  
+    return response
 
 class FarmersDetailsView(LoginRequiredMixin, DetailView):
      model = Farmers
@@ -67,7 +86,7 @@ class FarmersDetailsView(LoginRequiredMixin, DetailView):
 
 class FarmersUpdateView(LoginRequiredMixin, UpdateView):
     model = Farmers
-    fields = ['username','first_name','other_name', 'address','email','phone_no', 'county', 'sub_county', 'job', 'Social_media', 'password']
+    fields = ['username','first_name','other_name', 'address','email','phone_no', 'county', 'sub_county', 'job']
     template_name = "update_farmers_form.html"
     success_url = reverse_lazy('farmerslist')
 
@@ -131,7 +150,7 @@ class DiseaseCreateView(LoginRequiredMixin, CreateView):
 class DiseaseListView(LoginRequiredMixin, ListView):
      queryset = Diseases_and_Pestes.objects.all()
      context_object_name = "diseases"
-     template_name = "update_disease_form.html"
+     template_name = "p&diseases_list.html"
 
 
 class DiseaseUpdateView(LoginRequiredMixin, UpdateView):
@@ -217,7 +236,7 @@ def search(request):
 
 class FarmMarketingUpdateView(LoginRequiredMixin, UpdateView):
     model = FarmMarketing
-    fields = ['product','marketing_channel','marketing_method',            'marketing_cost','marketing_start_date','marketing_end_date', 'marketing_reach', 'marketing_conversions', 'county', 'sub_county']
+    fields = ['Maize','marketing_channel','quantity',            'marketing_cost','traded_on','county', 'sub_county']
     template_name = "update_market_form.html"
     success_url = reverse_lazy("marketplaces")
      

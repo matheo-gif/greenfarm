@@ -6,7 +6,7 @@ class FarmersForm(forms.ModelForm):
 
     class Meta:
         model = Farmers
-        fields = ('username','first_name','other_name', 'address','email','phone_no', 'county', 'sub_county', 'job', 'Social_media', 'password')
+        fields = ('username','first_name','other_name', 'address','email','phone_no', 'county', 'sub_county', 'job')
 
 class UpdateProfileForm(forms.ModelForm):
     phone_no = forms.CharField(max_length=100,required=True,widget=forms.TextInput(attrs={'class': 'form-control'}))

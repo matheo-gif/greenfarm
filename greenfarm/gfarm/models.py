@@ -45,7 +45,7 @@ class Farmers(models.Model):
     county = models.CharField(blank=False, null=False, max_length=100)
     sub_county = models.CharField(blank=False, null=False, max_length=100)
     job = models.CharField(blank=True, null=True, max_length=100)
-    Social_media=models.URLField(max_length=200)
+    
     
     
 
