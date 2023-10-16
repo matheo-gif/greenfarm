@@ -73,60 +73,7 @@
                     </a>
                     <!-- End Messages Icon -->
 
-                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
-                        <li class="dropdown-header">
-                            You have 3 new messages
-                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="{% static 'assets/img/messages-1.jpg' %}" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>Maria Hudson</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>4 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="{% static 'assets/img/messages-2.jpg' %}" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>Anna Nelson</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>6 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        <li class="message-item">
-                            <a href="#">
-                                <img src="{% static 'assets/img/messages-3.jpg' %}" alt="" class="rounded-circle">
-                                <div>
-                                    <h4>David Muldon</h4>
-                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
-                                    <p>8 hrs. ago</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-
-                        
-
-                    </ul>
+                   
                     <!-- End Messages Dropdown Items -->
 
                 </li>
@@ -135,7 +82,7 @@
                 <li class="nav-item dropdown pe-3">
 
                     <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                        <img src="{% static 'assets/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle">
+                        {% comment %} <img src="{% static 'assets/img/profile-img.jpg' %}" alt="Profile" class="rounded-circle"> {% endcomment %}
                         <span class="d-none d-md-block dropdown-toggle ps-2">{{user.username}}</span>
                     </a>
                     <!-- End Profile Iamge Icon -->
@@ -224,11 +171,7 @@
                         <i class="bi bi-circle"></i><span>diseases & pests</span>
                     </a>
                 </li>
-                <li>
-                    <a href="/harvests/">
-                        <i class="bi bi-circle"></i><span>Harvesting History</span>
-                    </a>
-                </li>
+
 
                 </ul>
             </li>
@@ -246,7 +189,7 @@
                     </li> -->
                     <li>
                         <a href="/add_market_place/">
-                            <i class="bi bi-circle"></i><span>Add market places</span>
+                            <i class="bi bi-circle"></i><span>Sell</span>
                         </a>
                     </li>
                     <li>
@@ -254,10 +197,7 @@
                             <i class="bi bi-circle"></i><span>add farm products</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="/add_harvests/">
-                            <i class="bi bi-circle"></i><span> Write Harvesting History</span>
-                        </a>
+            
                     </li>
                 </ul>
             </li>
@@ -289,21 +229,13 @@
 
             <li class="nav-heading">Pages</li>
 
-            <li class="nav-item">
+            {% comment %} <li class="nav-item">
                 <a class="nav-link collapsed" href="/profile/">
                     <i class="bi bi-person"></i>
                     <span>Profile</span>
                 </a>
-            </li>
-            <!-- End Profile Page Nav -->
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="/faq/">
-                    <i class="bi bi-question-circle"></i>
-                    <span>F.A.Q</span>
-                </a>
-            </li>
-            <!-- End F.A.Q Page Nav -->
+            </li> {% endcomment %}
+      
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="/add_contact/">

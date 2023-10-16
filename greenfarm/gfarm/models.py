@@ -6,6 +6,7 @@ from PIL import Image
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from datetime import datetime
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 # Create your models here.
@@ -20,6 +21,7 @@ class Profile(models.Model):
     
     def __str__(self):
         return str(self.user)
+    
 class Contact(models.Model):
     your_name = models.CharField(max_length=100, blank=True, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
@@ -158,11 +160,26 @@ class Harvest(models.Model):
     county = models.CharField(max_length=100, choices=COUNTIES, default='mombasa')
 
     def __str__(self):
-        return self.id
+        return str(self.id)
 
+COUNTIES = (
+    ('M-PESA', 'm-pesa'),
+    ('CASH', 'cash'),
+    ('CARD', 'visa-card'),
+    ('CHEQUE', 'cheque'),
+    )
 
-    
-
+class Post_Sell(models.Model):
+    seller = models.ForeignKey(User, on_delete=models. CASCADE, default="username")
+    phone_no = PhoneNumberField()
+    email= models.EmailField(max_length=200)
+    Product = models.CharField(max_length=200)
+    paymethod_method = models.CharField(max_length=50, choices=COUNTIES, default='m-pesa')
+    quantity_in_kg_or_tonnes  = models.CharField(max_length=50)
+    Stoke_costing = models.DecimalField(max_digits=1000000000, decimal_places=2)
+    trade_on=models.DateTimeField(default=datetime.now)
+    county = models.CharField(max_length=100, choices=COUNTIES, default='mombasa')
+    sub_county = models.CharField(blank=False, null=False, max_length=100)
 
 class FarmMarketing(models.Model):
     Maize = models.ForeignKey(FarmProduct, on_delete=models.CASCADE)
@@ -175,7 +192,7 @@ class FarmMarketing(models.Model):
 
      
     
-class Diseases_and_Pestes(models.Model):
+class Diseases_and_Pest(models.Model):
     Maize_Variety = models.ForeignKey(FarmProduct, on_delete=models.CASCADE)
     desease_name = models.CharField(max_length=100)
     image = models.ImageField(upload_to="profile_pics", blank=True, null=True)

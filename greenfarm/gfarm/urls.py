@@ -23,6 +23,7 @@ urlpatterns = [
      path("market/", FarmMarketingListView.as_view(), name="marketplaces"),
      path('market/delete/<str:pk>/', FarmMarketingtDeleteView.as_view(), name='delete_market'),
      path('market/update/<str:pk>/', FarmMarketingUpdateView.as_view(), name='update_market'),
+     path('market/detail/<str:pk>/', SellesDetailView.as_view(), name='detail_market'),
 
      path("add_product/",productCreateView.as_view(), name="add_farm_product"),
      path("product/", ProductListView.as_view(), name="product"),

@@ -24,11 +24,13 @@
                         <table class="table datatable">
                             <thead>
                                 <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Maize seeds</th>
-                                    <th scope="col">marketing_channel</th>
-                                    <th scope="col">quantity</th>
-                                    <th scope="col">costs</th>
+                                    
+                                    <th scope="col">seller</th>
+                                    
+                                    <th scope="col">email</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">quantity(kg/tonnes)</th>
+                                    <th scope="col">price</th>
                                     <th scope="col">date</th>
                                     <th scope="col">county</th>
                                     <th scope="col">sub_county</th>
@@ -39,16 +41,26 @@
                             <tbody>
                                 {% for markets in market %}
                                 <tr>
-                                    <th scope="row"><a href="{%url 'update_market' markets.id %}">{{markets.id}}</a>
-                                    </th>
-                                    <td>{{markets.Maize}}</td>
-                                    <td>{{markets.marketing_channel}}</td>
-                                    <td>{{markets.quantity}}</td>
-                                    <td>{{markets.marketing_cost}}</td>
+                                    
+                                    <td><a href="{%url 'update_market' markets.id %}">{{markets.seller}}</a></td>
+                                    <td>{{markets.phone_no}}</td>
+                                    
+                                    <td>{{markets.email}}</td>
+                                    <td>{{markets.Product}}</td>
+                                    <td>{{markets.paymethod_method}}</td>
+                                    <td>{{markets.quantity_in_kg_or_tonnes}}</td>
+                                    <td>{{markets.Stoke_costing}}</td>
                                     <td>{{markets.traded_on}}</td>
                                     <td>{{markets.county}}</td>
                                     <td>{{markets.sub_county}}</td>
-                                    <td><a href="{% url 'delete_market' markets.id %}">
+                                    <td><a href="{% url 'detail_market' markets.id %}">
+                                            <div class="icon">
+                                                <i class="icon-align-justify"></i> 
+
+                                            </div>
+
+                                        </a></td>
+                                        <td><a href="{% url 'delete_market' markets.id %}">
                                             <div class="icon">
                                                 <i class="bi bi-trash"></i>
 

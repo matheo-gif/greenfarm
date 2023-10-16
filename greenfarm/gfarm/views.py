@@ -14,7 +14,14 @@ from django.http import FileResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
-import csv  
+import csv 
+
+from django.views.generic.detail import DetailView
+
+
+
+
+
 # Views
 @login_required
 def home(request):
@@ -141,33 +148,33 @@ def search(request):
     
 #-----------------
 class DiseaseCreateView(LoginRequiredMixin, CreateView):
-     model =Diseases_and_Pestes
+     model =Diseases_and_Pest
      form_class = ProductForm
      template_name = "farm_p&diseases_form.html"
      success_url = reverse_lazy('diseases')
 
 
 class DiseaseListView(LoginRequiredMixin, ListView):
-     queryset = Diseases_and_Pestes.objects.all()
+     queryset = Diseases_and_Pest.objects.all()
      context_object_name = "diseases"
      template_name = "p&diseases_list.html"
 
 
 class DiseaseUpdateView(LoginRequiredMixin, UpdateView):
-    model = Diseases_and_Pestes
+    model = Diseases_and_Pest
     fields = "__all__"
     template_name = "update_disease_form.html"
     success_url = reverse_lazy("disease")
 
 class DiseaseDeleteView(LoginRequiredMixin, DeleteView):
-     model = Diseases_and_Pestes
+     model = Diseases_and_Pest
      template_name = "delete_form.html"
      success_url = reverse_lazy("disease")
      
 def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        blogs = Diseases_and_Pestes.objects.filter(title__contains=searched)
+        blogs = Diseases_and_Pest.objects.filter(title__contains=searched)
         return render(request, "search.html", {'searched':searched, 'blogs':blogs})
     else:
         return render(request, "search.html", {})
@@ -179,7 +186,7 @@ class HarvestCreateView(LoginRequiredMixin, CreateView):
      model = Harvest
      form_class = HarvestForm
      template_name = "farm_harvest_form.html"
-     success_url = reverse_lazy('harvest')
+     success_url = reverse_lazy('harvests')
 
 
 class HarvestListView(LoginRequiredMixin, ListView):
@@ -209,25 +216,31 @@ def search(request):
 
 # ---------------
 class FarmMarketingCreateView(LoginRequiredMixin, CreateView):
-     model = FarmMarketing 
+     model = Post_Sell
      form_class = MarketingForm
      template_name = "market_form.html"
      success_url = reverse_lazy("marketplaces")
 
 class FarmMarketingListView(LoginRequiredMixin, ListView):
-     queryset = FarmMarketing.objects.all()
+     queryset = Post_Sell.objects.all()
      context_object_name = "market"
      template_name = "NiceAdmin/market_list.html"
 
 class FarmMarketingtDeleteView(LoginRequiredMixin, DeleteView):
-    model = FarmMarketing
+    model = Post_Sell
     template_name = "delete_form.html"
     success_url = reverse_lazy("marketplaces")
+
+
+class SellesDetailView(DetailView):
+    model = Post_Sell
+    template_name = "detail_view.html"
+    
     
 def search(request):
     if request.method == "POST":
         searched = request.POST['searched']
-        blogs = FarmMarketing.objects.filter(title__contains=searched)
+        blogs = Post_Sell.objects.filter(title__contains=searched)
         return render(request, "search.html", {'searched':searched, 'blogs':blogs})
     else:
         return render(request, "search.html", {})
@@ -235,10 +248,13 @@ def search(request):
 
 
 class FarmMarketingUpdateView(LoginRequiredMixin, UpdateView):
-    model = FarmMarketing
-    fields = ['Maize','marketing_channel','quantity',            'marketing_cost','traded_on','county', 'sub_county']
+    model = Post_Sell
+    form_class = MarketingForm
     template_name = "update_market_form.html"
     success_url = reverse_lazy("marketplaces")
+
+
+
      
 
 class contactPage(LoginRequiredMixin, CreateView):
@@ -271,14 +287,5 @@ def search(request):
     else:
         return render(request, "search.html", {})
 
-
-# class RegisterPage(TemplateView):
-#      template_name = "NiceAdmin/pages-register.html"
-
-# class loginPage(TemplateView):
-#      template_name = "NiceAdmin/pages-login.html"
-
-class FAQPage(LoginRequiredMixin, TemplateView):
-     template_name = "NiceAdmin/pages-faq.html"
 
 

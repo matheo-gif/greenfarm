@@ -55,5 +55,5 @@ class HarvestForm(forms.ModelForm):
 class MarketingForm(forms.ModelForm):
     
     class Meta:
-        model = FarmMarketing
+        model = Post_Sell
         fields = "__all__"
