@@ -161,8 +161,7 @@ class Harvest(models.Model):
 
     def __str__(self):
         return str(self.id)
-
-COUNTIES = (
+PAYMENT = (
     ('M-PESA', 'm-pesa'),
     ('CASH', 'cash'),
     ('CARD', 'visa-card'),
@@ -174,7 +173,7 @@ class Post_Sell(models.Model):
     phone_no = PhoneNumberField()
     email= models.EmailField(max_length=200)
     Product = models.CharField(max_length=200)
-    paymethod_method = models.CharField(max_length=50, choices=COUNTIES, default='m-pesa')
+    paymethod_method = models.CharField(max_length=50, choices=PAYMENT, default='m-pesa')
     quantity_in_kg_or_tonnes  = models.CharField(max_length=50)
     Stoke_costing = models.DecimalField(max_digits=1000000000, decimal_places=2)
     trade_on=models.DateTimeField(default=datetime.now)

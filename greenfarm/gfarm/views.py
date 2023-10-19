@@ -255,18 +255,16 @@ class FarmMarketingUpdateView(LoginRequiredMixin, UpdateView):
 
 
 
-     
-
 class contactPage(LoginRequiredMixin, CreateView):
-     model = Contact
-     form_class = ContactForm
-     template_name = "NiceAdmin/contact_form.html"
-     success_url = reverse_lazy("contact")
+    model = Contact
+    form_class = ContactForm
+    template_name = "NiceAdmin/contact_form.html"
+    success_url = reverse_lazy("contact")
 
 class contactListView(LoginRequiredMixin, ListView):
-     queryset = Contact.objects.all()
-     context_object_name = "contact"
-     template_name = "NiceAdmin/contact_list.html"
+    queryset = Contact.objects.all()
+    context_object_name = "contact"
+    template_name = "NiceAdmin/contact_list.html"
      
 class contactUpdateView(LoginRequiredMixin, UpdateView):
     model = Contact
