@@ -191,7 +191,7 @@ class HarvestCreateView(LoginRequiredMixin, CreateView):
 
 class HarvestListView(LoginRequiredMixin, ListView):
      queryset = Harvest.objects.all()
-     context_object_name = "harvet"
+     context_object_name = "harvest"
      template_name = "farm_harvest_list.html"
 
 
@@ -235,6 +235,7 @@ class FarmMarketingtDeleteView(LoginRequiredMixin, DeleteView):
 class SellesDetailView(DetailView):
     model = Post_Sell
     template_name = "detail_view.html"
+    success_url = reverse_lazy("marketplaces")
     
     
 def search(request):
@@ -284,6 +285,70 @@ def search(request):
         return render(request, "search.html", {'searched':searched, 'blogs':blogs})
     else:
         return render(request, "search.html", {})
+
+#---------------
+class PlantingRecordsPage(LoginRequiredMixin, CreateView):
+    model = PlantingRecords
+    form_class = PlantingRecordsForm
+    template_name = "NiceAdmin/PlantingRecordst_form.html"
+    success_url = reverse_lazy("disease")
+
+class PlantingListView(LoginRequiredMixin, ListView):
+    queryset = PlantingRecords.objects.all()
+    context_object_name = "PRecords"
+    template_name = "NiceAdmin/sell_post_list.html"
+     
+class PlantingRecordsUpdateView(LoginRequiredMixin, UpdateView):
+    model = PlantingRecords
+    fields = ['farmer','Maize_Variety','planted_on', 'county','sub_county','image','describe_process','land_size']
+    template_name = "update_PlantingRecords_form.html"
+    success_url = reverse_lazy("PlantingRecords")
+     
+class PlantingDeleteView(LoginRequiredMixin, DeleteView):
+    model = PlantingRecords
+    template_name = "delete_form.html"
+    success_url = reverse_lazy("PlantingRecords")
+    
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        blogs = PlantingRecords.objects.filter(title__contains=searched)
+        return render(request, "search.html", {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, "search.html", {})
+
+
+#--------
+class BuyerPage(LoginRequiredMixin, CreateView):
+    model = Buyer
+    form_class = BuyerForm
+    template_name = "NiceAdmin/Buyer_form.html"
+    success_url = reverse_lazy('buyer')
+
+class BuyerView(LoginRequiredMixin, ListView):
+    queryset = Buyer.objects.all()
+    context_object_name = "buyer"
+    template_name = "buyer_list.html"
+     
+class BuyerUpdateView(LoginRequiredMixin, UpdateView):
+    model = Buyer
+    fields = ['farmer','Maize_Variety','planted_on', 'county','sub_county ','image','describe_process','land_size']
+    template_name = "update_Buyer_form.html"
+    success_url = reverse_lazy("Buyer")
+     
+class BuyerDeleteView(LoginRequiredMixin, DeleteView):
+    model = Buyer
+    template_name = "delete_form.html"
+    success_url = reverse_lazy("Buyer")
+    
+def search(request):
+    if request.method == "POST":
+        searched = request.POST['searched']
+        blogs = Buyer.objects.filter(title__contains=searched)
+        return render(request, "search.html", {'searched':searched, 'blogs':blogs})
+    else:
+        return render(request, "search.html", {})
+
 
 
 

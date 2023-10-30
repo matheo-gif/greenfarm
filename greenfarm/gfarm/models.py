@@ -88,6 +88,7 @@ class FarmProduct(models.Model):
         return self.Maize_Variety
 
 
+
 kenyan_regions = (
     ('Central','Central Region'),
     ('Coast','Coast Region'),
@@ -152,12 +153,13 @@ COUNTIES = (
 
 
 class Harvest(models.Model):
-    id = models.AutoField(primary_key=True)
+    farmer = models.ForeignKey(User, on_delete=models. CASCADE, default="username")
     Maize = models.ForeignKey(FarmProduct, on_delete=models.CASCADE, default="Maize_Variety")
     land_size = models.CharField(max_length=100)
-    quantity = models.CharField(max_length=100)
+    quantity_harvested = models.CharField(max_length=100)
     region = models.CharField(max_length=20, choices =kenyan_regions,default='Central Region')
     county = models.CharField(max_length=100, choices=COUNTIES, default='mombasa')
+    description = models.TextField(max_length=200000)
 
     def __str__(self):
         return str(self.id)
@@ -170,7 +172,7 @@ PAYMENT = (
 
 class Post_Sell(models.Model):
     seller = models.ForeignKey(User, on_delete=models. CASCADE, default="username")
-    phone_no = PhoneNumberField()
+    phone_no = models.CharField(max_length=10, blank=True)
     email= models.EmailField(max_length=200)
     Product = models.CharField(max_length=200)
     paymethod_method = models.CharField(max_length=50, choices=PAYMENT, default='m-pesa')
@@ -195,10 +197,34 @@ class Diseases_and_Pest(models.Model):
     Maize_Variety = models.ForeignKey(FarmProduct, on_delete=models.CASCADE)
     desease_name = models.CharField(max_length=100)
     image = models.ImageField(upload_to="profile_pics", blank=True, null=True)
-    description = models.TextField(max_length=200)
+    description = models.TextField(max_length=200000)
     posible_solutions = models.TextField(max_length=200)
     county_affected = models.CharField(max_length=100, choices=COUNTIES, default='mombasa')
     
-     
-     
+
+class PlantingRecords(models.Model):
+    farmer = models.ForeignKey(User, on_delete=models. CASCADE, default="username")
+    Maize_Variety = models.CharField(max_length=100, choices=VARIETY)
+    planted_on=models.DateTimeField(default=datetime.now)
+    county = models.CharField(max_length=100, choices=COUNTIES, default='mombasa')
+    sub_county = models.CharField(blank=True, null=True, max_length=100)
+    land_size = models.CharField(blank=True, null=True, max_length=100)
+    image = models.ImageField(upload_to="profile_pics", blank=True, null=True)
+    describe_process = models.TextField()
+
+    def __str__(self):
+        return self.farmer
+
+class Buyer (models.Model):
+    name = models.ForeignKey(User, on_delete=models. CASCADE, default="username")
+    product_goods = models.ForeignKey(Post_Sell, on_delete=models. CASCADE, default="product")
+    county = models.CharField(max_length=100, choices=COUNTIES, default='mombasa')
+    sub_county = models.CharField(blank=False, null=False, max_length=100)
+    quantity_in_kg_or_tonnes  = models.CharField(max_length=100000)
+    describe_product = models.TextField(max_length=2000)
+    costing = models.CharField(blank=False, null=False, max_length=100)
+
+    def __str__(self):
+        return self.name
+    
     

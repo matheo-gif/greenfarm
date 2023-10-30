@@ -57,3 +57,15 @@ class MarketingForm(forms.ModelForm):
     class Meta:
         model = Post_Sell
         fields = "__all__"
+
+
+class PlantingRecordsForm(forms.ModelForm):
+    class Meta:
+        model =PlantingRecords
+        fields = "__all__"
+
+
+class BuyerForm(forms.ModelForm):
+    class Meta:
+        model = Buyer
+        fields = "__all__"

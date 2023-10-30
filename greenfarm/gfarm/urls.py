@@ -44,6 +44,15 @@ urlpatterns = [
      path("add_contact/",contactPage.as_view()),
      path('contact/delete/<str:pk>/', contactDeleteView.as_view(), name="contact-delete"),
      path('contact/update/<str:pk>/', contactUpdateView.as_view(), name="contact-update"),
-     
+
+     path("planting/", PlantingListView.as_view(), name="planting-info"),
+     path("add_planting/", PlantingRecordsPage.as_view()),
+     path('planting/delete/<str:pk>/', PlantingDeleteView.as_view(), name="planting-delete"),
+     path('planting/update/<str:pk>/', PlantingRecordsUpdateView.as_view(), name="planting-update"),
+
+     path("buyer/", BuyerView.as_view(), name="buyer-info"),
+     path("add_buyer/", BuyerPage.as_view(), name="add-buyer"),
+     path('buyer/delete/<str:pk>/', BuyerDeleteView.as_view(), name="buyer-delete"),
+     path('buyer/update/<str:pk>/', BuyerUpdateView.as_view(), name="buyer-update"),
      
 ]

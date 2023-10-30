@@ -25,50 +25,42 @@
                             <thead>
                                 <tr>
                                     
-                                    <th scope="col">seller</th>
-                                    <th scope="col">contact</th>
+                                    <th scope="col">name</th>
+                                    <th scope="col">product goods</th>
+                                   
                                     <th scope="col">Product</th>
-                                    <th scope="col">pay via</th>
+                                    
                                     <th scope="col">qntity (kg/tonnes)</th>
                                     <th scope="col">price(ksh)</th>
-                                    <th scope="col">data</th>
+                                    
                                     <th scope="col">county</th>
                                     <th scope="col">sub county</th>
-                                   
+
                                 </tr>
                             </thead>
 
                             <tbody>
-                                {% for markets in market %}
+                                {% for buyers in buyer %}
                                 <tr>
                                     
-                                    <td><a href="{%url 'update_market' markets.id %}">{{markets.seller}}</a></td>
-                                    <td>{{markets.phone_no}}</td>
+                                    <td><a href="{%url 'buyer-update' buyer.id %}">{{markets.seller}}</a></td>
+                                    <td>{{buyers.name}}</td>
                                     
-                                    <td>{{markets.Product}}</td>
-                                    <td>{{markets.paymethod_method}}</td>
-                                    <td>{{markets.quantity_in_kg_or_tonnes}}</td>
-                                    <td>{{markets.Stoke_costing}}</td>
-                                    <td>{{markets.trade_on|date:'d,m,Y'}}</td>
-                                    <td>{{markets.county}}</td>
-                                    <td>{{markets.sub_county}}</td>
-                                    <td>
-                                        <a href="{% url 'delete_market' markets.id %}">
-                                            <div class="icon text-danger">
-                                                <i class="bi bi-trash"></i> 
+                                    <td>{{Buyers.product_goods}}</td>
+                                    <td>{{Buyers.county}}</td>
+                                    <td>{{Buyers.sub_county}}</td>
+                                    <td>{{Buyers.quantity_in_kg_or_tonnes}}</td>
+                                    <td>{{Buyers.describe_product}}</td>
+                                    <td>{{Buyers.costing}}</td>
+                                    
+                                    <td><a href="{% url 'buyer-delete' Buyers.id %}">
+                                            <div class="icon">
+                                                <i class="icon-align-justify"></i> 
 
                                             </div>
 
                                         </a></td>
-                                        <td>
-                                            <a href="/add_buyer/">
-                                            <div class="icon">
-                                                <i>buy now</i>
-
-                                            </div>
-
-                                        </a>
-                                    </td>
+                                        </a></td>
 
                                 </tr>
                                 {% endfor %}
